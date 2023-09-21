@@ -7,7 +7,18 @@
 </head>
 <body>
    <script>
-      
+      function book(title, author, pages, read) {
+         this.title = title;
+         this.author = author;
+         this.pages = pages;
+         this.read = read;
+         this.info = () => {
+            return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`;
+         }
+      }
+
+      book1 = new book("some shit", "some guy", Infinity, false);
+      console.log(book1.info());
    </script>
 </body>
 </html>
