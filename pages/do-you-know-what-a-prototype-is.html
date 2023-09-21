@@ -24,7 +24,9 @@
       // 
       // Put more formally, we'll be defining things 'on' the Player.prototype
       // object
-      Player.prototype.blah = () => `but is my name really "${this.name}"?`;
+      Player.prototype.blah = function() {
+         return `but is my name really "${this.name}"?`;
+      };
       console.log(player1.blah());
       console.log(player2.blah());
    </script>
