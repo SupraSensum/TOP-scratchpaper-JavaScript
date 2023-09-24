@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Prototypal Inheritance Self-Test</title>
+</head>
+<body>
+   <script>
+      function Person(name, age) {
+         this.name = name;
+         this.age = age;
+      }
+
+      function Enemy(motive) {
+         this.motive = motive;
+         Person.call(this, name, age);
+      }
+
+      Object.setPrototypeOf(Enemy.prototype, Person.prototype);
+
+      const enemy1 = new Enemy('to pet kittens');
+      // enemy1.name = 'HE WHO PETS KITTENS';
+      // enemy1.age = Infinity;
+
+      console.log(enemy1);
+
+      Person.prototype.sayName = function() {
+         console.log(`Hello, my name is ${this.name}`);
+      };
+
+      Enemy.prototype.sayName = function() {
+         console.log(`Ain't happenin', chief.`);
+      };
+
+      enemy1.sayName();
+   </script>
+</body>
+</html>
