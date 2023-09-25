@@ -63,8 +63,17 @@ function House (price, sqft, year) {
 }
 
 // create array of country objects
-for (let i = 0; i < countries.length; i++) {
-   countriesObjects[countries[i]] = new Country(countries[i], prompt(`${countries[i]} language:`), prompt(`${countries[i]} population:`));
+function generateCountriesObjects() {
+   for (let i = 0; i < countries.length; i++) {
+      countriesObjects[countries[i]] = new Country(countries[i], prompt(`${countries[i]} language:`), prompt(`${countries[i]} population:`));
+   }
+
+   const userCountry = prompt("Enter country name:");
+   if (countriesObjects.includes(userCountry)) {
+      generateStatesObjects();
+   } else {
+      countriesObjects[countries[i]] = new Country(countries[i], prompt(`${countries[i]} language:`), prompt(`${countries[i]} population:`));
+   }
 }
 
 console.log(countriesObjects);
