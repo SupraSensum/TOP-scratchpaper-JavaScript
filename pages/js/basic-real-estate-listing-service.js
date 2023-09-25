@@ -1,4 +1,5 @@
 const countries = ['United States of America', 'Brazil'];
+const countriesObjects = {};
 
 const usStates = [
    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
@@ -11,6 +12,7 @@ const usStates = [
    "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
    "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
 ];
+const usStatesObjects = {};
 
 const brazilStates = [
    'Acre',
@@ -41,21 +43,28 @@ const brazilStates = [
    'Sergipe',
    'Tocantins'
 ];
+const brazilStatesObjects = {};
 
 function Country (name, lang, pop) {
-   this.name = name,
-   this.lang = lang,
-   this.pop = pop,
+   this.countryName = name;
+   this.lang = lang;
+   this.countryPop = pop;
 }
 
 function State (name, pop) {
-   this.name = name,
-   this.pop = pop,
+   this.stateName = name;
+   this.statePop = pop;
 }
 
 function House (price, sqft, year) {
-   this.price = price,
-   this.sqft = sqft,
-   this.year = year,
+   this.price = price;
+   this.sqft = sqft;
+   this.year = year;
 }
 
+// create array of country objects
+for (let i = 0; i < countries.length; i++) {
+   countriesObjects[countries[i]] = new Country(countries[i], prompt(`${countries[i]} language:`), prompt(`${countries[i]} population:`));
+}
+
+console.log(countriesObjects);
