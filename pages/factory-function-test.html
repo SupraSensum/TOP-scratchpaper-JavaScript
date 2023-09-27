@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Factory Function Test</title>
+</head>
+<body>
+   <script>
+      "use strict"
+
+      // returns a function
+      const factoryFunction = () => {
+         const msg = "What's cookin'?";
+         return () => {
+            console.log(msg);
+         };
+      };
+      const inquire = factoryFunction();
+      inquire();
+
+      // returns an object with methods
+      const factoryFunctionMethods = () => {
+         let counter = 0;
+         let obj = {
+            increment: () => {
+               counter++
+               return obj;
+            },
+            outputToLog: () => {
+               console.log(counter);
+               return obj;
+            },
+            reset: () => {
+               counter = 0;
+               return obj;
+            },
+         };
+
+         return obj;
+      };
+      const counter1 = factoryFunctionMethods();
+      counter1.outputToLog().increment().outputToLog().increment().outputToLog().reset().outputToLog();
+      counter1.increment();
+      counter1.outputToLog();
+
+      // takes a string, capitalizes, returns an object with public methods
+      const leStringCapitalizer = (string) => {
+         let capitalizedString = string.toUpperCase();
+         return {
+            logCapitalized: () => console.log(capitalizedString),
+         };
+      };
+      const godsTaco = leStringCapitalizer("god's taco");
+      godsTaco.logCapitalized();
+
+      // basically combining some of the above stuffs, except all funcs will be
+      // created outside the return line. This way, the return line will be much
+      // cleaner
+      const counterCapitalizer = (string) => {
+         let counter = 0;
+         let capitalizedString = string.toUpperCase();
+         const increment = () => {
+            counter++;
+         };
+         const logToConsole = () => {
+            console.log(counter);
+         };
+         const resetCounter = () => {
+            counter = 0;
+         };
+         const logCapitalizedString = () => {
+            console.log(capitalizedString);
+         };
+         return {
+            increment,
+            logToConsole,
+            resetCounter,
+            logCapitalizedString,
+         };
+      }
+      const myCC = counterCapitalizer('shwifty');
+
+      // same as above, but we'll be returning the obj with each function so
+      // that the user can chain methods
+      const counterCapitalizerTwoPointOh = (string) => {
+         let counter = 0;
+         let capitalizedString = string.toUpperCase();
+         const obj = {
+            increment: (nTimes = 1) => {
+               for (let i = 0; i < nTimes; i++) {
+                  counter++;
+               };
+               return obj;
+            },
+            logToConsole: () => {
+               console.log(counter);
+               return obj;
+            },
+            resetCounter: () => {
+               counter = 0;
+               return obj;
+            },
+            logCapitalizedString: () => {
+               console.log(capitalizedString);
+               return obj;
+            },
+         }
+         return obj;
+      }
+      const myCCTPO = counterCapitalizerTwoPointOh('shwofty');
+   </script>
+</body>
+</html>
