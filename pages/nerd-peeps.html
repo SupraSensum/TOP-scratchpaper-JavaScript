@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Nerd Peeps</title>
+</head>
+<body>
+   <script>
+      const Person = (name) => {
+         const sayName = () => console.log(`my name is ${name}`);
+         return { sayName };
+      }
+
+      const Nerd = (name) => {
+         // simply create a person and pull out the sayName function with destructuring assignment syntax!
+         const { sayName } = Person(name);
+         const doSomethingNerdy = () => console.log('nerd stuff');
+         return { sayName, doSomethingNerdy };
+      }
+
+      const jeff = Nerd('jeff');
+
+      jeff.sayName(); // my name is jeff
+      jeff.doSomethingNerdy(); // nerd stuff
+   </script>
+</body>
+</html>
