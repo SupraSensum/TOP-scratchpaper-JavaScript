@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>CodeLlama Library Attempt</title>
+</head>
+<body>
+   <form>
+      <label for="bookName">Book Name: </label>
+      <input type="text" id="bookName"><br><br>
+   
+      <label for="author">Author: </label>
+      <input type="text" id="author"><br><br>
+   
+      <label for="pages">Pages: </label>
+      <input type="number" id="pages"><br><br>
+   
+      <label for="readStatus">Read Status: </label>
+      <select name="readStatus" id="readStatus">
+         <option value="notStarted">Not started</option>
+         <option value="inProgress">In progress</option>
+         <option value="finished">Finished</option>
+      </select><br><br>
+   
+      <button type="submit">Add Book</button>
+   </form>
+   <script>
+      const form = document.querySelector('form');
+      const submitButton = document.querySelector('#addBook');
+
+      submitButton.addEventListener('click', function (event) {
+         // Prevent default form submission behavior
+         event.preventDefault();
+
+         const bookName = document.querySelector('#bookName').value;
+         const author = document.querySelector('#author').value;
+         const pages = Number(document.querySelector('#pages').value);
+         const readStatus = document.querySelector('#readStatus').value;
+
+         // Add new book object to array
+         const books = [{
+            name: bookName,
+            author: author,
+            pages: pages,
+            readStatus: readStatus
+         }];
+      });
+
+      // Loop through books array and create elements
+      books.forEach((book) => {
+         const div = document.createElement('div');
+         div.innerHTML = `
+            <h2>${book.name}</h2>
+            <p>By ${book.author}</p>
+            <p>${book.pages} pages</p>
+            <p>${book.readStatus}</p>
+            <button onclick="changeReadStatus(${book.id})">Change Read Status</button>
+            <button onclick="deleteBook(${book.id})">Delete Book</button>
+         `;
+         document.body.appendChild(div);
+      });
+
+      // Change read status function
+      function changeReadStatus(bookId) {
+         // Update book object in array
+         const book = books[bookId];
+         book.readStatus = 'finished';
+         console.log("Book ID:", bookId, "New Read Status:", book.readStatus);
+      }
+
+      // Delete book function
+      function deleteBook(bookId) {
+         // Remove book object from array
+         const index = books.findIndex((book) => book.id === bookId);
+         if (index !== -1) {
+            books.splice(index, 1);
+         }
+
+         // Remove DOM element
+         const bookElement = document.querySelector(`#book-${bookId}`);
+         bookElement.remove();
+      }
+   </script>
+   <style>
+      /* General styles */
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      }
+
+      body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      }
+
+      /* Form styles */
+      form {
+      max-width: 600px;
+      margin: 20px auto;
+      border: none;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      }
+
+      label {
+      display: block;
+      margin-bottom: 10px;
+      }
+
+      input[type="text"], select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus, select:focus {
+      box-shadow: 0px 0px 5px rgba(81, 203, 238, 1);
+      }
+
+      input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+      background-color: #45a049;
+      }
+
+      /* Book card styles */
+      .book-card {
+      position: relative;
+      width: 300px;
+      height: 170px;
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+      }
+
+      .book-card h2 {
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: bold;
+      }
+
+      .book-card p {
+      margin-bottom: 10px;
+      }
+
+      .book-card button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      }
+
+      .book-card button:hover {
+      background-color: #45a049;
+      }
+   </style>
+</body>
+</html>
