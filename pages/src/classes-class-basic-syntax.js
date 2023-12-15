@@ -125,54 +125,44 @@ user_withSetGet = new User_withSetGet(""); // Name is too short.
 
 // Here's my attempt... TBD
 
-// Gave up on this attempt
-// class Clock {
-//    timer = undefined;
+// Gave up on this attempt. Ended up cheating. The crux was stupid simple.
+// `timer` is being created by `start()`. `setInterval` needed an anonymous
+// function set in order to bring in the proper `this`. Ugh. Took me way too
+// fucking long to figure that one out...
+class Clock {
+   constructor({ template }) {
+      this.template = template;
+   }
 
-//    constructor(template) {
-//       this.template = template;
-//    }
+   render() {
+      let date = new Date();
 
-//    set template({ template }) {
-//       this._template = template;
-//    }
+      let hours = date.getHours();
+      if (hours < 10) hours = '0' + hours;
 
-//    get template() {
-//       return this._template;
-//    }
+      let mins = date.getMinutes();
+      if (mins < 10) mins = '0' + mins;
 
-//    render() {
-//       let date = new Date();
+      let secs = date.getSeconds();
+      if (secs < 10) secs = '0' + secs;
 
-//       let hours = date.getHours();
-//       if (hours < 10) hours = '0' + hours;
+      let output = this.template
+         .replace('h', hours)
+         .replace('m', mins)
+         .replace('s', secs);
 
-//       let mins = date.getMinutes();
-//       if (mins < 10) mins = '0' + mins;
+      console.log(output);
+   }
 
-//       let secs = date.getSeconds();
-//       if (secs < 10) secs = '0' + secs;
+   stop() {
+      clearInterval(this.timer);
+   }
 
-//       console.log(this.template);
-//       console.log(this._template);
-
-//       let output = this.template
-//          .replace('h', hours)
-//          .replace('m', mins)
-//          .replace('s', secs);
-
-//       console.log(output);
-//    }
-
-//    stop() {
-//       clearInterval(this.timer);
-//    }
-
-//    start() {
-//       this.render();
-//       timer = setInterval(this.render, 1000);
-//    }
-// }
+   start() {
+      this.render();
+      this.timer = setInterval(() => this.render(), 1000);
+   }
+}
 
 let clock = new Clock({ template: 'h:m:s' });
 clock.start();
