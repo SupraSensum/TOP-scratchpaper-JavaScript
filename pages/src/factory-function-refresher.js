@@ -79,3 +79,24 @@ const calculator = (function () {
       div
    };
 })();
+
+// 
+// Quick practice following this tutorial on closure:
+// https://youtu.be/80O6L2Ez3GM?si=BTasd2XGws8Amb0x
+// 
+// We're going to check out how we can use closures to protect data from manipulation.
+// In the example below, `points` is vulnerable to manipulation
+// 
+let points = 0;
+
+let score = function() {
+   points++;
+
+   return points;
+}
+
+console.log(score());
+console.log(score());
+console.log(score());
+
+// Keeping the points variable 
