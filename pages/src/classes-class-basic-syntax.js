@@ -88,79 +88,91 @@ user_withSetGet = new User_withSetGet(""); // Name is too short.
 // Now let's practice using the tasks at the bottom of that article
 
 // This is the original, and I need to format it into "class" syntax
-function Clock({ template }) {
+// function Clock({ template }) {
 
-   let timer;
+//    let timer;
 
-   function render() {
-      let date = new Date();
+//    function render() {
+//       let date = new Date();
 
-      let hours = date.getHours();
-      if (hours < 10) hours = '0' + hours;
+//       let hours = date.getHours();
+//       if (hours < 10) hours = '0' + hours;
 
-      let mins = date.getMinutes();
-      if (mins < 10) mins = '0' + mins;
+//       let mins = date.getMinutes();
+//       if (mins < 10) mins = '0' + mins;
 
-      let secs = date.getSeconds();
-      if (secs < 10) secs = '0' + secs;
+//       let secs = date.getSeconds();
+//       if (secs < 10) secs = '0' + secs;
 
-      let output = template
-         .replace('h', hours)
-         .replace('m', mins)
-         .replace('s', secs);
+//       let output = template
+//          .replace('h', hours)
+//          .replace('m', mins)
+//          .replace('s', secs);
 
-      console.log(output);
-   }
+//       console.log(output);
+//    }
 
-   this.stop = function () {
-      clearInterval(timer);
-   };
+//    this.stop = function () {
+//       clearInterval(timer);
+//    };
 
-   this.start = function () {
-      render();
-      timer = setInterval(render, 1000);
-   };
+//    this.start = function () {
+//       render();
+//       timer = setInterval(render, 1000);
+//    };
 
-}
-
-let clock = new Clock({ template: 'h:m:s' });
-clock.start();
+// }
 
 // Here's my attempt... TBD
 
-class Clock {
-   constructor({ template }) {
-      this.render(template);
-   }
+// Gave up on this attempt
+// class Clock {
+//    timer = undefined;
 
-   render({ template }) {
-      let date = new Date();
+//    constructor(template) {
+//       this.template = template;
+//    }
 
-      let hours = date.getHours();
-      if (hours < 10) hours = '0' + hours;
+//    set template({ template }) {
+//       this._template = template;
+//    }
 
-      let mins = date.getMinutes();
-      if (mins < 10) mins = '0' + mins;
+//    get template() {
+//       return this._template;
+//    }
 
-      let secs = date.getSeconds();
-      if (secs < 10) secs = '0' + secs;
+//    render() {
+//       let date = new Date();
 
-      let output = template
-         .replace('h', hours)
-         .replace('m', mins)
-         .replace('s', secs);
+//       let hours = date.getHours();
+//       if (hours < 10) hours = '0' + hours;
 
-      console.log(output);
-   }
+//       let mins = date.getMinutes();
+//       if (mins < 10) mins = '0' + mins;
 
-   
+//       let secs = date.getSeconds();
+//       if (secs < 10) secs = '0' + secs;
 
-   this.stop = function () {
-      clearInterval(timer);
-   };
+//       console.log(this.template);
+//       console.log(this._template);
 
-   this.start = function () {
-      render();
-      timer = setInterval(render, 1000);
-   };
-}
+//       let output = this.template
+//          .replace('h', hours)
+//          .replace('m', mins)
+//          .replace('s', secs);
+
+//       console.log(output);
+//    }
+
+//    stop() {
+//       clearInterval(this.timer);
+//    }
+
+//    start() {
+//       this.render();
+//       timer = setInterval(this.render, 1000);
+//    }
+// }
+
+let clock = new Clock({ template: 'h:m:s' });
+clock.start();
