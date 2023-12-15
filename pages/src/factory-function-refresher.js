@@ -99,4 +99,31 @@ console.log(score());
 console.log(score());
 console.log(score());
 
-// Keeping the points variable 
+points += 100; // Manipulating/attacking the variable to hack a fake score
+
+console.log(score());
+console.log(score());
+console.log(score());
+
+// Keeping the points variable effectively global opens it up to "attack".
+// So, let's make it private by implementing a closure
+
+let scoreNew = function() {
+   let pointsNew = 0;
+
+   return function() {
+      pointsNew++;
+
+      return pointsNew;
+   }
+}(); // Remember, this needs to be immediately invoked
+
+console.log(scoreNew());
+console.log(scoreNew());
+console.log(scoreNew());
+
+// pointsNew += 100; // Will cause error since variable has been made private
+
+console.log(scoreNew());
+console.log(scoreNew());
+console.log(scoreNew());
