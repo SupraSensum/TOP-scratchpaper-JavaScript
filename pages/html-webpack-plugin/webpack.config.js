@@ -8,28 +8,17 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devtool: 'eval',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,
     open: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
-  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      title: 'Webpack 5 Video Tutoirals',
       filename: 'index.html',
       inject: 'body',
+      template: './src/index.html',
     }),
   ],
 };
