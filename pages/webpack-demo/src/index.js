@@ -2,6 +2,8 @@ import _ from 'lodash';
 import myName from './myName.js';
 import './style.css';
 import goldblum from './goldblum.png';
+import DataXml from './dataset.xml';
+import DataCsv from './MOCK_DATA.csv';
 
 function component() {
    const element = document.createElement('div');
@@ -15,6 +17,9 @@ function component() {
    myImage.src = goldblum;
 
    element.appendChild(myImage);
+
+   console.log(DataXml);
+   console.log(DataCsv);
 
    return element;
 }
