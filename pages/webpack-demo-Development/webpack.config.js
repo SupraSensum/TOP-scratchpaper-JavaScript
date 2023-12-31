@@ -18,4 +18,10 @@ module.exports = {
          title: 'Development',
       }),
    ],
+   devServer: {
+      static: './dist',
+   },
+   optimization: {
+      runtimeChunk: 'single',
+   },
 };
